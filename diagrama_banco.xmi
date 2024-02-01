@@ -1,0 +1,54 @@
+@startuml
+!define Tabela class
+
+Tabela Usuario {
+  id: integer
+  --
+  nome: string
+  idade: integer
+  peso: decimal
+  altura: decimal
+  fator_atividade_fisica: string
+}
+
+Tabela Alimento {
+  id: integer
+  --
+  nome: string
+  calorias_grama: int
+  proteinas_grama: int
+  carboidratos_grama: int
+  gorduras_grama: int
+  sodio_grama: int
+}
+
+Tabela Dieta {
+  id: integer
+  --
+  nome: string
+  data_criacao: date
+  id_usuario: integer <<FK>>
+}
+
+Tabela ItemDieta {
+  id: integer
+  --
+  quantidade_gramas: integer
+  id_dieta: integer <<FK>>
+  id_alimento: integer <<FK>>
+}
+
+Tabela RegistroSaude {
+  id: integer
+  --
+  data: date
+  peso: decimal
+  taxa_metabolica_basal: integer
+  id_usuario: integer <<FK>>
+}
+
+Usuario --o{ Dieta
+Dieta --o{ ItemDieta
+ItemDieta --{ Alimento
+Usuario --o{ RegistroSaude
+@enduml
